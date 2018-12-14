@@ -20,6 +20,9 @@ import com.nordnetab.chcp.main.events.UpdateDownloadErrorEvent;
 import com.nordnetab.chcp.main.events.UpdateInstallationErrorEvent;
 import com.nordnetab.chcp.main.events.UpdateInstalledEvent;
 import com.nordnetab.chcp.main.events.UpdateIsReadyToInstallEvent;
+import com.nordnetab.chcp.main.events.ManifestDiffCompleteEvent;
+import com.nordnetab.chcp.main.events.UpdateDownloadProgressEvent;
+import com.nordnetab.chcp.main.events.UpdateInstallProgressEvent;
 import com.nordnetab.chcp.main.js.JSAction;
 import com.nordnetab.chcp.main.js.PluginResultHelper;
 import com.nordnetab.chcp.main.model.ChcpError;
@@ -913,6 +916,57 @@ public class HotCodePushPlugin extends CordovaPlugin {
             installJsCallback.sendPluginResult(jsResult);
             installJsCallback = null;
         }
+
+        sendMessageToDefaultCallback(jsResult);
+    }
+
+    /**
+     * Listener for event that Content Manifest Diff Complete.
+     *
+     * @param event event information
+     * @see ManifestDiffCompleteEvent
+     * @see EventBus
+     */
+    @SuppressWarnings("unused")
+    @Subscribe
+    public void onEvent(ManifestDiffCompleteEvent event) {
+        Log.d("CHCP", "CHCP Content Manifest Diff Complete: " + event.data().get("updateFiles"));
+
+        PluginResult jsResult = PluginResultHelper.pluginResultFromEvent(event);
+
+        sendMessageToDefaultCallback(jsResult);
+    }
+
+    /**
+     * Listener for event that Content Manifest Diff Complete.
+     *
+     * @param event event information
+     * @see ManifestDiffCompleteEvent
+     * @see EventBus
+     */
+    @SuppressWarnings("unused")
+    @Subscribe
+    public void onEvent(UpdateDownloadProgressEvent event) {
+        Log.d("CHCP", "CHCP Single File Download Complete: " + event.data().get("fileName"));
+
+        PluginResult jsResult = PluginResultHelper.pluginResultFromEvent(event);
+
+        sendMessageToDefaultCallback(jsResult);
+    }
+
+    /**
+     * Listener for event that Content Manifest Diff Complete.
+     *
+     * @param event event information
+     * @see ManifestDiffCompleteEvent
+     * @see EventBus
+     */
+    @SuppressWarnings("unused")
+    @Subscribe
+    public void onEvent(UpdateInstallProgressEvent event) {
+        Log.d("CHCP", "Single File Install Complete");
+
+        PluginResult jsResult = PluginResultHelper.pluginResultFromEvent(event);
 
         sendMessageToDefaultCallback(jsResult);
     }

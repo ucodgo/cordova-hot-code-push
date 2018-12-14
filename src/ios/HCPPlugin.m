@@ -429,6 +429,20 @@ static NSString *const DEFAULT_STARTING_PAGE = @"index.html";
                            selector:@selector(onNothingToInstallEvent:)
                                name:kHCPNothingToInstallEvent
                              object:nil];
+
+    // update progress events
+    [notificationCenter addObserver:self
+                           selector:@selector(onUpdateDownloadProgressEvent:)
+                               name:kHCPUpdateDownloadProgressEvent
+                             object:nil];
+    [notificationCenter addObserver:self
+                           selector:@selector(onUpdateInstallProgressEvent:)
+                               name:kHCPUpdateInstallProgressEvent
+                             object:nil];
+    [notificationCenter addObserver:self
+                           selector:@selector(onManifestDiffCompleteEvent:)
+                               name:kHCPManifestDiffCompleteEvent
+                             object:nil];
 }
 
 /**
@@ -656,6 +670,42 @@ static NSString *const DEFAULT_STARTING_PAGE = @"index.html";
     [self loadURL:[self indexPageFromConfigXml]];
     
     [self cleanupFileSystemFromOldReleases];
+}
+
+/**
+ *  Method is called when every single update file downloaded complete from server.
+ *
+ *  @param notification captured notification with the event details
+ */
+- (void)onUpdateDownloadProgressEvent:(NSNotification *)notification {
+    CDVPluginResult *pluginResult = [CDVPluginResult pluginResultForNotification:notification];
+    
+    // send notification to the default callback
+    [self invokeDefaultCallbackWithMessage:pluginResult];
+}
+
+/**
+ *  Method is called when every single update file installed complete.
+ *
+ *  @param notification captured notification with the event details
+ */
+- (void)onUpdateInstallProgressEvent:(NSNotification *)notification {
+    CDVPluginResult *pluginResult = [CDVPluginResult pluginResultForNotification:notification];
+    
+    // send notification to the default callback
+    [self invokeDefaultCallbackWithMessage:pluginResult];
+}
+
+/**
+ *  Method is called when content manifest diff complete, with diff data.
+ *
+ *  @param notification captured notification with the event details
+ */
+- (void)onManifestDiffCompleteEvent:(NSNotification *)notification {
+    CDVPluginResult *pluginResult = [CDVPluginResult pluginResultForNotification:notification];
+    
+    // send notification to the default callback
+    [self invokeDefaultCallbackWithMessage:pluginResult];
 }
 
 #pragma mark Rollback process
