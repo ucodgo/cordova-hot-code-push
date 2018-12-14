@@ -1,5 +1,10 @@
 # Change Log
 
+## 1.5.4 (2018-12-14)
+
+- Fix `chcp_updateLoadFailed` not fire on iOS device when no connection avaliable.
+- Add `chcp_manifestDiffComplete` and `chcp_updateDownloadProgressEvent` event to indicate update download progress. [More info](https://github.com/snipking/cordova-hot-code-push/wiki/Listen-for-update-events)
+
 ## 1.5.3 (2016-05-27)
 
 **Bug fixes:**
