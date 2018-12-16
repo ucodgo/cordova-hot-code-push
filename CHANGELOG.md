@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.5.5 (2018-12-16)
+
+- Version Number Up
+
 ## 1.5.4 (2018-12-14)
 
 - Fix `chcp_updateLoadFailed` not fire on iOS device when no connection avaliable.
