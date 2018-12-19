@@ -120,6 +120,7 @@ public class HotCodePushPlugin extends CordovaPlugin {
         // ensure that www folder installed on external storage;
         // if not - install it
         isPluginReadyForWork = isPluginReadyForWork();
+        Log.d("CHCP", "CHCP onStart is plugin ready for work: " + isPluginReadyForWork);
         if (!isPluginReadyForWork) {
             dontReloadOnStart = true;
             installWwwFolder();
@@ -228,12 +229,41 @@ public class HotCodePushPlugin extends CordovaPlugin {
         }
 
         pluginInternalPrefsStorage = new PluginInternalPreferencesStorage(cordova.getActivity());
-        PluginInternalPreferences config = pluginInternalPrefsStorage.loadFromPreference();
-        if (config == null || TextUtils.isEmpty(config.getCurrentReleaseVersionName())) {
-            config = PluginInternalPreferences.createDefault(cordova.getActivity());
-            pluginInternalPrefsStorage.storeInPreference(config);
+        PluginInternalPreferences configFromInter = pluginInternalPrefsStorage.loadFromPreference();
+        if (configFromInter != null) {
+            Log.d("CHCP", "loadPluginInternalPreferences config from internal preferences store: " + configFromInter.toString());
+        } else {
+            Log.d("CHCP", "loadPluginInternalPreferences config from internal preferences store is null");
         }
-        pluginInternalPrefs = config;
+
+        if (configFromInter == null || TextUtils.isEmpty(configFromInter.getCurrentReleaseVersionName())) {
+            configFromInter = PluginInternalPreferences.createDefault(cordova.getActivity());
+            pluginInternalPrefsStorage.storeInPreference(configFromInter);
+
+            if (configFromInter != null) {
+                Log.d("CHCP", "loadPluginInternalPreferences config from asset: " + configFromInter.toString());
+            }
+
+            pluginInternalPrefs = configFromInter;
+        } else {
+            PluginInternalPreferences configFromAsset = PluginInternalPreferences.createDefault(cordova.getActivity());
+
+            // if current release version name like '2018.12.19-15.26.06' or '1.0.0'
+            if (configFromInter.getCurrentReleaseVersionName().matches("\\d+\\.\\d+\\.\\d+-\\d+\\.\\d+\\.\\d+") || configFromInter.getCurrentReleaseVersionName().matches("\\d+\\.\\d+\\.\\d+")) {
+                Long currentReleaseVersionNameFromInter = Long.parseLong(configFromInter.getCurrentReleaseVersionName().replace(".", "").replace("-", ""));
+                Long currentReleaseVersionNameFromAsset = Long.parseLong(configFromAsset.getCurrentReleaseVersionName().replace(".", "").replace("-", ""));
+
+                Log.d("CHCP", "loadPluginInternalPreferences compare inter [" + currentReleaseVersionNameFromInter + "] and asset [" + currentReleaseVersionNameFromAsset + "] release version name");
+
+                if (currentReleaseVersionNameFromInter > currentReleaseVersionNameFromAsset) {
+                    pluginInternalPrefs = configFromInter;
+                } else {
+                    pluginInternalPrefs = configFromAsset;
+                }
+            } else {
+                pluginInternalPrefs = configFromInter;
+            }
+        }
     }
 
     // endregion
