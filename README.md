@@ -24,7 +24,7 @@ As a result, your application receives updates of the web content as soon as pos
 
 ### Installation
 
-This requires cordova 5.0+ (current stable 1.5.6)
+This requires cordova 5.0+ (current stable 1.5.7)
 
 ```sh
 cordova plugin add cordova-hot-code-push-plugin

@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.5.7 (2018-12-19)
+
+- Support version update with iOS install. When old APK install with `1.0.0` and opened. Install new APK contains `1.0.1` and open will trigger version check. If new APK contains asset version number bigger than the old one. The new asset will install to local dir. Currently supported version number like `2018.12.19-15.26.06` and `1.0.0`.
+
 ## 1.5.6 (2018-12-19)
 
 - Support version update with android APK install. When old APK install with `1.0.0` and opened. Install new APK contains `1.0.1` and open will trigger version check. If new APK contains asset version number bigger than the old one. The new asset will install to local dir. Currently supported version number like `2018.12.19-15.26.06` and `1.0.0`.
