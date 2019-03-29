@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.5.8 (2019-03-29)
+
+- [Issue #1](https://github.com/snipking/cordova-hot-code-push/issues/1). Fixed by change plugin id from `cordova-hot-code-push-plugin` to `cordova-hot-code-push-plugin-renew`.
+
 ## 1.5.7 (2019-01-09)
 
 - Support version update with iOS install. When old APK install with `1.0.0` and opened. Install new APK contains `1.0.1` and open will trigger version check. If new APK contains asset version number bigger than the old one. The new asset will install to local dir. Currently supported version number like `2018.12.19-15.26.06` and `1.0.0`.
