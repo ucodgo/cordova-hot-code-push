@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.5.9 (2020-07-20)
+
+- Change `xcode` module require to support cordova 9
+
 ## 1.5.8 (2019-03-29)
 
 - [Issue #1](https://github.com/snipking/cordova-hot-code-push/issues/1). Fixed by change plugin id from `cordova-hot-code-push-plugin` to `cordova-hot-code-push-plugin-renew`.
