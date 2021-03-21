@@ -32,10 +32,10 @@ cordova plugin add cordova-hot-code-push-plugin-renew
 
 It is also possible to install via repo url directly (__unstable__)
 ```sh
-cordova plugin add https://github.com/snipking/cordova-hot-code-push.git
+cordova plugin add https://github.com/ucodgo/cordova-hot-code-push.git
 ```
 
-At the end of the installation plugin will recommend you to install [Cordova Hot Code Push CLI client](https://github.com/snipking/cordova-hot-code-push-cli). This client will help you to:
+At the end of the installation plugin will recommend you to install [Cordova Hot Code Push CLI client](https://github.com/ucodgo/cordova-hot-code-push-cli). This client will help you to:
 - easily generate necessary configuration files;
 - launch local server to listen for any changes in the web project and deploy new version immediately on the app.
 
@@ -43,7 +43,7 @@ Of course, you can use this plugin without the CLI client, but it will make your
 
 ### Quick start guide
 
-In this guide we will show how quickly you can test this plugin and start using it for development. For that we will install [development add-on](https://github.com/snipking/cordova-hot-code-push/wiki/Local-Development-Plugin).
+In this guide we will show how quickly you can test this plugin and start using it for development. For that we will install [development add-on](https://github.com/ucodgo/cordova-hot-code-push/wiki/Local-Development-Plugin).
 
 1. Create new Cordova project using command line interface and add iOS/Android platforms:
 
